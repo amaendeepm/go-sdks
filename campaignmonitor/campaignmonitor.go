@@ -1,4 +1,4 @@
-package ernit
+package campaignmonitor-sdk
 
 
 import (
