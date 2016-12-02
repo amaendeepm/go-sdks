@@ -31,10 +31,12 @@ func updateSubscriber(jsonStr []byte, r *http.Request, email string) (string, er
 
 	putEp:= buildEndpointForSubscriberUpdating(CM_SignupListID, email)
 
+	//Start of Code - Required if working in context of AppEngine
 	ctx := appengine.NewContext(r)
 	client := &http.Client{
 		Transport: &urlfetch.Transport{Context: ctx},
 	}
+	//End of Code - Required if working in context of AppEngine
 
 	req, err := http.NewRequest("PUT", putEp, bytes.NewBuffer(jsonStr))
 	req.Header.Set("Authorization", "Basic " + CM_AuthHeader)
@@ -104,10 +106,12 @@ func add2CMList(endpoint string, jsonStr []byte, r *http.Request) (string, error
 
 func invokeCM_POST(endpoint string, payload []byte, r *http.Request) (string, error) {
 
+	//Start of Code - Required if working in context of AppEngine
 	ctx := appengine.NewContext(r)
 	client := &http.Client{
 		Transport: &urlfetch.Transport{Context: ctx},
 	}
+	//End of Code - Required if working in context of AppEngine
 
 	req, err := http.NewRequest("POST", endpoint, bytes.NewBuffer(payload))
 	req.Header.Set("Authorization", "Basic " + CM_AuthHeader)
